@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use app\Http\Middleware\Auth;
+use App\Http\Middleware\Auth;
 
 class Middleware {
     public const MAP = [

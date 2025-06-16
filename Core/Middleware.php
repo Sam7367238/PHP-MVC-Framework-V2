@@ -2,11 +2,13 @@
 
 namespace Core;
 
-use App\Http\Middleware\Auth;
+use App\Http\Middleware\Authenticated;
+use App\Http\Middleware\Guest;
 
 class Middleware {
     public const MAP = [
-        "auth" => Auth::class
+        "auth" => Authenticated::class,
+        "guest" => Guest::class
     ];
 
     public static function resolve($key) {

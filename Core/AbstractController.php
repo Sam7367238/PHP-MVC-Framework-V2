@@ -8,7 +8,7 @@ abstract class AbstractController {
 	public function render($template, $variables = []) {
 		extract($variables);
 
-		$content = require(BASE_PATH . "/views/$template.php");
+		$content = require(BASE_PATH . "/Views/$template.php");
 		$response = new Response($content);
 
 		return $response;

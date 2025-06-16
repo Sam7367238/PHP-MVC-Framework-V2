@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Database\Connection;
-
 class Kernel {
 	protected $connection = null;
 
@@ -16,7 +14,7 @@ class Kernel {
 	public function handle($request) {
 		$router = new Router();
 
-		require(BASE_PATH . "/routes/web.php");
+		require(BASE_PATH . "/Routes/web.php");
 		
 		return $router -> route($request -> uri(), $request -> method());
 	}

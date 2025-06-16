@@ -53,7 +53,7 @@ class Router {
                     $controller = new $route["controller"][0];
                     $method = $route["controller"][1];
 
-                    $result =  call_user_func_array([$controller, $method], $params);
+                    $result = call_user_func_array([$controller, $method], $params);
                 }
 
                 if (is_callable($route["controller"])) {

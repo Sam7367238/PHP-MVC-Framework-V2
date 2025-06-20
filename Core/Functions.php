@@ -23,5 +23,16 @@ function authorize($condition, $status = Response::FORBIDDEN) {
 }
 
 function views() {
-    return BASE_PATH . "/Views";
+    return BASE_PATH . "/Views/";
+}
+
+function view($path, $variables) {
+    extract($variables);
+
+	ob_start();
+	require(views() . "$path.php");
+	$content = ob_get_clean();
+	$response = new Response($content);
+
+	return $response;
 }

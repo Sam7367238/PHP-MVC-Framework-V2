@@ -42,33 +42,20 @@ class Router {
                 array_shift($matches);
 
                 $params = [];
-                
                 foreach ($route["paramNames"] as $idx => $name) {
                     $params[$name] = $matches[$idx] ?? null;
                 }
 
                 Middleware::resolve($route["middleware"]);
 
-                if (is_array($route["controller"])) {
-                    $controller = new $route["controller"][0];
-                    $method = $route["controller"][1];
-
-                    $result = call_user_func_array([$controller, $method], $params);
-                }
-
-                if (is_callable($route["controller"])) {
-                    $result = call_user_func_array($route["controller"], $params);
-                }
-
-                if ($result instanceof Response) {
-                    return $result;
-                }
-
-                return new Response($result);
+                return [
+                    "controller" => $route["controller"],
+                    "params" => $params
+                ];
             }
         }
 
-        abort();
+        return null;
     }
 
     public function previousUrl() {

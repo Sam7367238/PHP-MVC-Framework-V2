@@ -11,7 +11,7 @@ class Request {
 		private $post,
 		private $files,
 		private $cookie,
-		private $env,
+		private $env
 	) {}
 
 	public static function create() {
@@ -22,7 +22,7 @@ class Request {
 				$_POST,
 				$_FILES,
 				$_COOKIE,
-				$_ENV,
+				$_ENV
 			);
 		}
 

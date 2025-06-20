@@ -14,8 +14,30 @@ class Kernel {
 	public function handle($request) {
 		$router = new Router();
 
-		require(BASE_PATH . "/Routes/web.php");
+		require(BASE_PATH . "/Routes.php");
 		
-		return $router -> route($request -> uri(), $request -> method());
+		$route = $router -> route($request -> uri(), $request -> method());
+
+		if (!$route) {
+			abort(404);
+		}
+
+		$controller = $route["controller"];
+		$params = array_values($route["params"]);
+
+		if (is_callable($controller)) {
+			return call_user_func_array($controller, $params);
+		}
+
+		if (is_array($controller)) {
+			$instance = new $controller[0];
+			$method = $controller[1];
+
+			if ($controller instanceof AbstractController) {
+				$controller -> setRequest($request);
+			}
+
+			return call_user_func_array([$instance, $method], $params);
+		}
 	}
 }

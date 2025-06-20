@@ -6,6 +6,6 @@ use Core\AbstractController;
 
 class BookController extends AbstractController {
 	public function show($id) {
-		echo "Book " . $id;
+		return view("index", ["id" => $id]);
 	}
 }
